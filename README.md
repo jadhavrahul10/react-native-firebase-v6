@@ -58,4 +58,6 @@ If all has gone well you'll see an initial screen like the one below.
 
 ## Screenshots
 
-![preview](https://i.imgur.com/4lG4HuS.png)
+![preview](./screenshot/android.jpeg)
+
+![preview](./screenshot/ios.png)
