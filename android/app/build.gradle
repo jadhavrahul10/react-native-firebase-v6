@@ -197,54 +197,55 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    /* ----------------------------
-    *    REACT NATIVE FIREBASE
-    * ---------------------------- */
-
-    // Firebase bom setup
-    implementation platform("com.google.firebase:firebase-bom:24.3.0")
-
-    /* ----------------
-    *   FIREBASE SDKS
-    * ----------------- */
-
-    implementation('com.google.firebase:firebase-ads') {
-      // exclude `customtabs` as the support lib version is out of date
-      // we manually add it as a dependency below with a custom version
-      exclude group: 'com.android.support', module: 'customtabs'
-    }
-
-    // Authentication
-    implementation "com.google.firebase:firebase-auth"
-    // Analytics
-    implementation "com.google.firebase:firebase-analytics"
-    // Performance Monitoring
-    implementation "com.google.firebase:firebase-perf"
-    // Remote Config
-    implementation "com.google.firebase:firebase-config"
-    // Cloud Storage
-    implementation "com.google.firebase:firebase-storage"
-    // Dynamic Links
-    implementation "com.google.firebase:firebase-dynamic-links"
-    // Real-time Database
-    implementation "com.google.firebase:firebase-database"
-    // Cloud Functions
-    implementation "com.google.firebase:firebase-functions"
-    // Cloud Firestore
-    implementation "com.google.firebase:firebase-firestore"
-    // Cloud Messaging / FCM
-    implementation "com.google.firebase:firebase-messaging"
-    // Crashlytics
-    implementation('com.crashlytics.sdk.android:crashlytics@aar') {
-        transitive = true
-    }
+//
+//     /* ----------------------------
+//     *    REACT NATIVE FIREBASE
+//     * ---------------------------- */
+//
+//     // Firebase bom setup
+//     implementation platform("com.google.firebase:firebase-bom:24.3.0")
+//
+//     /* ----------------
+//     *   FIREBASE SDKS
+//     * ----------------- */
+//
+//     implementation('com.google.firebase:firebase-ads') {
+//       // exclude `customtabs` as the support lib version is out of date
+//       // we manually add it as a dependency below with a custom version
+//       exclude group: 'com.android.support', module: 'customtabs'
+//     }
+//
+//     // Authentication
+//     implementation "com.google.firebase:firebase-auth"
+//     // Analytics
+//     implementation "com.google.firebase:firebase-analytics"
+//     // Performance Monitoring
+//     implementation "com.google.firebase:firebase-perf"
+//     // Remote Config
+//     implementation "com.google.firebase:firebase-config"
+//     // Cloud Storage
+//     implementation "com.google.firebase:firebase-storage"
+//     // Dynamic Links
+//     implementation "com.google.firebase:firebase-dynamic-links"
+//     // Real-time Database
+//     implementation "com.google.firebase:firebase-database"
+//     // Cloud Functions
+//     implementation "com.google.firebase:firebase-functions"
+//     // Cloud Firestore
+//     implementation "com.google.firebase:firebase-firestore"
+//     // Cloud Messaging / FCM
+//     implementation "com.google.firebase:firebase-messaging"
+//     // Crashlytics
+//     implementation('com.crashlytics.sdk.android:crashlytics@aar') {
+//         transitive = true
+//     }
 
     /* --------------------------------
     *  OPTIONAL SUPPORT LIBS
     * -------------------------------- */
 
     // Needed to support API<21, though there is a small chance proguard shrinks things sufficiently
-    implementation "androidx.multidex:multidex:2.0.1"
+//     implementation "androidx.multidex:multidex:2.0.1"
 
     // For Firebase Ads
     //noinspection GradleCompatible

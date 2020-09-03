@@ -1,7 +1,21 @@
 import React from 'react';
-import { StyleSheet, Platform, Image, Text, View, ScrollView } from 'react-native';
+import {StyleSheet, Platform, Image, Text, View, ScrollView} from 'react-native';
+import {Alert} from 'react-native';
 
-import firebase from 'react-native-firebase';
+import firebase from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import functions from '@react-native-firebase/functions';
+import messaging from '@react-native-firebase/messaging';
+import storage from '@react-native-firebase/storage';
+import crashlytics from '@react-native-firebase/crashlytics';
+import database from '@react-native-firebase/database';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import iid from '@react-native-firebase/iid';
+import inAppMessaging from '@react-native-firebase/in-app-messaging';
+import perf from '@react-native-firebase/perf';
+
 
 export default class App extends React.Component {
   constructor() {
@@ -10,12 +24,49 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
-    // TODO: You: Do firebase things
-    // const { user } = await firebase.auth().signInAnonymously();
-    // console.warn('User -> ', user.toJSON());
-
-    // await firebase.analytics().logEvent('foo', { bar: '123'});
+    this.checkPermission()
+    this.createNotificationListeners();
   }
+
+  async createNotificationListeners() {
+
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log('Message handled in the background!', remoteMessage);
+    });
+  }
+
+
+  async checkPermission() {
+    const enabled = await messaging().hasPermission();
+    if (enabled) {
+      this.getToken();
+    } else {
+      this.requestPermission();
+    }
+  }
+
+  async getToken() {
+    let firebasetokenid = await messaging().getToken();
+    if (firebasetokenid) {
+      console.log("firebasetokenid" + firebasetokenid)
+    } else {
+      this.getToken();
+    }
+  }
+
+  async requestPermission() {
+    try {
+      await messaging().requestPermission();
+      // User has authorised
+      this.getToken();
+    } catch (error) {
+    }
+  }
+
 
   render() {
     return (
@@ -41,20 +92,18 @@ export default class App extends React.Component {
           )}
           <View style={styles.modules}>
             <Text style={styles.modulesHeader}>The following Firebase modules are pre-installed:</Text>
-            {firebase.admob.nativeModuleExists && <Text style={styles.module}>admob()</Text>}
-            {firebase.analytics.nativeModuleExists && <Text style={styles.module}>analytics()</Text>}
-            {firebase.auth.nativeModuleExists && <Text style={styles.module}>auth()</Text>}
-            {firebase.config.nativeModuleExists && <Text style={styles.module}>config()</Text>}
-            {firebase.crashlytics.nativeModuleExists && <Text style={styles.module}>crashlytics()</Text>}
-            {firebase.database.nativeModuleExists && <Text style={styles.module}>database()</Text>}
-            {firebase.firestore.nativeModuleExists && <Text style={styles.module}>firestore()</Text>}
-            {firebase.functions.nativeModuleExists && <Text style={styles.module}>functions()</Text>}
-            {firebase.iid.nativeModuleExists && <Text style={styles.module}>iid()</Text>}
-            {firebase.links.nativeModuleExists && <Text style={styles.module}>links()</Text>}
-            {firebase.messaging.nativeModuleExists && <Text style={styles.module}>messaging()</Text>}
-            {firebase.notifications.nativeModuleExists && <Text style={styles.module}>notifications()</Text>}
-            {firebase.perf.nativeModuleExists && <Text style={styles.module}>perf()</Text>}
-            {firebase.storage.nativeModuleExists && <Text style={styles.module}>storage()</Text>}
+            {<Text style={styles.module}>{analytics()._config.namespace}</Text>}
+            {<Text style={styles.module}>{auth()._config.namespace}</Text>}
+            {<Text style={styles.module}>{crashlytics()._config.namespace}</Text>}
+            {<Text style={styles.module}>{database()._config.namespace}</Text>}
+            {<Text style={styles.module}>{firestore()._config.namespace}</Text>}
+            {<Text style={styles.module}>{functions()._config.namespace}</Text>}
+            {<Text style={styles.module}>{iid()._config.namespace}</Text>}
+            {<Text style={styles.module}>{dynamicLinks()._config.namespace}</Text>}
+            {<Text style={styles.module}>{messaging()._config.namespace}</Text>}
+            {<Text style={styles.module}>{inAppMessaging()._config.namespace}</Text>}
+            {<Text style={styles.module}>{perf()._config.namespace}</Text>}
+            {<Text style={styles.module}>{storage()._config.namespace}</Text>}
           </View>
         </View>
       </ScrollView>

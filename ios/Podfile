@@ -31,21 +31,19 @@ target 'RNFirebaseStarter' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Required by RNFirebase
-  pod 'Firebase/Core', '~> 6.13.0'
+  pod 'RNFBAnalytics', :path => '../node_modules/@react-native-firebase/analytics'
+  pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
+  pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
+  pod 'RNFBFunctions', :path => '../node_modules/@react-native-firebase/functions'
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
+  pod 'RNFBStorage', :path => '../node_modules/@react-native-firebase/storage'
+  pod 'RNFBCrashlytics', :path => '../node_modules/@react-native-firebase/crashlytics'
+  pod 'RNFBDatabase', :path => '../node_modules/@react-native-firebase/database'
+  pod 'RNFBDynamicLinks', :path => '../node_modules/@react-native-firebase/dynamic-links'
+  pod 'RNFBIid', :path => '../node_modules/@react-native-firebase/iid'
+  pod 'RNFBInAppMessaging', :path => '../node_modules/@react-native-firebase/in-app-messaging'
+  pod 'RNFBPerf', :path => '../node_modules/@react-native-firebase/perf'
 
-  # [OPTIONAL PODS] - comment out pods for firebase products you won't be using.
-  # pod 'Firebase/AdMob', '~> 6.13.0'
-  pod 'Firebase/Auth', '~> 6.13.0'
-  pod 'Firebase/Database', '~> 6.13.0'
-  pod 'Firebase/Functions', '~> 6.13.0'
-  pod 'Firebase/DynamicLinks', '~> 6.13.0'
-  pod 'Firebase/Firestore', '~> 6.13.0'
-  pod 'Firebase/Messaging', '~> 6.13.0'
-  pod 'Firebase/RemoteConfig', '~> 6.13.0'
-  pod 'Firebase/Storage', '~> 6.13.0'
-  pod 'Firebase/Performance', '~> 6.13.0'
-  pod 'Fabric', '~> 1.10.2'
-  pod 'Crashlytics', '~> 3.14.0'
 
   target 'RNFirebaseStarterTests' do
     inherit! :search_paths
